@@ -1,13 +1,13 @@
-GITOPS_REPO ?= https://github.com/bacherfl/openfeature-argo-demo
+GITOPS_REPO ?= https://github.com/open-feature/cloud-native-demo
 
 cleanup-environment: uninstall-ofo uninstall-argo
 
-install-environment-with-ingress: install-ofo install-ingress install-argo create-argo-app
+install-environment-with-ingress: install-ofo install-argo create-argo-app install-ingress
 
 install-environment: install-ofo install-argo create-argo-app
 
 install-ofo:
-	kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.1/cert-manager.yaml &&
+	kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.10.1/cert-manager.yaml
 	kubectl wait --for=condition=Available=True deploy --all -n 'cert-manager'
 	kubectl apply -f environment/ofo/ofo.yaml
 	kubectl wait --for=condition=Available=True deploy --all -n 'open-feature-operator-system'
